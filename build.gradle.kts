@@ -44,6 +44,7 @@ dependencies {
     testImplementation("org.flywaydb:flyway-database-postgresql:${flywayVersion}")
     testImplementation("org.postgresql:postgresql:${postgresqlVersion}")
     testImplementation("org.testcontainers:testcontainers-postgresql:${testcontainersVersion}")
+    testImplementation("io.qameta.allure:allure-junit5")
 }
 
 tasks.withType<JavaCompile>().configureEach {

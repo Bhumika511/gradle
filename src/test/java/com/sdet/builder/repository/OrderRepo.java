@@ -1,11 +1,7 @@
 package com.sdet.builder.repository;
-
 import com.sdet.builder.db.DatabaseConfig;
 import com.sdet.builder.model.Orders;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderRepo {
     public void save(Orders order) {
