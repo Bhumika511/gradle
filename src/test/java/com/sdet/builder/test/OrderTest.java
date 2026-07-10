@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderTest {
 
-
         private static final OrderRepo repo = new OrderRepo();
         private static final OrderFactory factory = new OrderFactory(repo);
 
