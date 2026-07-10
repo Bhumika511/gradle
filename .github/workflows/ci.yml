@@ -70,7 +70,7 @@ jobs:
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
-          allure_results: Gradle_Project/build/allure-results
+          allure_results: build/allure-results
           allure_report: allure-report
           gh_pages: gh-pages
           allure_history: allure-history
