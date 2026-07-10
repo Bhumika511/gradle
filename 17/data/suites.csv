@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Should appear under Test defects (broken)","5","brokenDefect()","","2026-07-10","broken","2026-07-10","","com.sdet.builder.test.allureReporting","com.sdet.builder.test.allureReporting","brokenDefect"
+"Categories split flaky,test and product","4","categoriesPutGenericFlakyRules()","","2026-07-10","passed","2026-07-10","","com.sdet.builder.test.allureReporting","com.sdet.builder.test.allureReporting","categoriesPutGenericFlakyRules"
+"Should appear under Product defects","12","productDefect()","","2026-07-10","failed","2026-07-10","","com.sdet.builder.test.allureReporting","com.sdet.builder.test.allureReporting","productDefect"
+"The Test will skip and add to skipped category","0","skippedTest()","","2026-07-10","skipped","2026-07-10","","com.sdet.builder.test.allureReporting","com.sdet.builder.test.allureReporting","skippedTest"
+"","37","countsOrders()","","2026-07-10","passed","2026-07-10","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","countsOrders"
+"","121","createsOrder()","","2026-07-10","passed","2026-07-10","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","createsOrder"
