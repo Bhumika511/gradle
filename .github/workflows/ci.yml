@@ -59,12 +59,14 @@ jobs:
             -Ddb.user=postgres
             -Ddb.password=postgres
 
-      - name: Checkout gh-pages branch
+      # Optional: Debug to verify Allure results are generated
+      - name: Check Allure Results
         if: always()
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: gh-pages
+        run: |
+          echo "Current Directory:"
+          pwd
+          echo "Listing build directory:"
+          ls -R build || true
 
       - name: Generate Allure Report
         if: always()
@@ -82,3 +84,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          force_orphan: true
