@@ -58,6 +58,8 @@ jobs:
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
             -Ddb.user=postgres
             -Ddb.password=postgres
+
+      # Keep this only while debugging. You can remove it later.
       - name: Debug Allure Results
         if: always()
         run: |
@@ -67,6 +69,14 @@ jobs:
           echo "=== Result JSON ==="
           cat build/allure-results/*-result.json || true
 
+      # Checkout existing gh-pages history (won't fail on first run)
+      - name: Checkout gh-pages branch
+        if: always()
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       - name: Generate Allure Report
         if: always()
@@ -84,4 +94,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
-          force_orphan: true
