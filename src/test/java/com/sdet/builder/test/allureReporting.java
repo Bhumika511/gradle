@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Epic("Framework Hardening")
 @Feature("Reporting Insights")
 @Owner("SDET Trainee")
-public class AllureReporting {
+public class allureReporting {
 
         @Test
         @Story("Categories")

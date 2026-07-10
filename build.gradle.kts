@@ -74,6 +74,8 @@ fun Test.useProjectTestClasses() {
 tasks.test {
     description = "Runs the default classroom-safe Gradle checks without launching a browser."
     include("**/OrderTest.class")
+    include("**/allureReporting.class")
+
     maxParallelForks = 1
 }
 val orderTest by tasks.registering(Test::class) {

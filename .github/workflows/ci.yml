@@ -52,7 +52,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Order Test
-        run: ./gradlew orderTest --no-configuration-cache
+        run: ./gradlew test
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
