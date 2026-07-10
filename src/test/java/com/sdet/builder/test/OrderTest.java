@@ -2,7 +2,6 @@ package com.sdet.builder.test;
 
 import com.sdet.builder.builder.OrderBuilder;
 import com.sdet.builder.factory.OrderFactory;
-import com.sdet.builder.model.Orders;
 import com.sdet.builder.repository.OrderRepo;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
