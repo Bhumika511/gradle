@@ -128,7 +128,7 @@ tasks.test {
     include("**/OrderTest.class")
 
     // Change this if your actual class name differs.
-    include("**/allureReporting.class")
+    include("**/AllureReportingTest.class")
 
     maxParallelForks = 1
 }
