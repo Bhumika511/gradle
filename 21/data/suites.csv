@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","0","skippedTest()","","2026-07-11","skipped","2026-07-11","","com.sdet.builder.test.AllureReportingTest","com.sdet.builder.test.AllureReportingTest","skippedTest"
+"Verify that a new order is created successfully.","153","createsOrder()","","2026-07-11","passed","2026-07-11","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","createsOrder"
+"Verify that categories.json is configured correctly.","31","verifyCategoriesConfiguration()","","2026-07-11","passed","2026-07-11","","com.sdet.builder.test.AllureReportingTest","com.sdet.builder.test.AllureReportingTest","verifyCategoriesConfiguration"
+"Intentional failure to demonstrate Product Defect category.","12","productFailure()","","2026-07-11","failed","2026-07-11","","com.sdet.builder.test.AllureReportingTest","com.sdet.builder.test.AllureReportingTest","productFailure"
+"Intentional broken test to demonstrate Broken category.","4","brokenTest()","","2026-07-11","broken","2026-07-11","","com.sdet.builder.test.AllureReportingTest","com.sdet.builder.test.AllureReportingTest","brokenTest"
+"Verify total number of orders.","72","countsOrders()","","2026-07-11","passed","2026-07-11","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","countsOrders"
