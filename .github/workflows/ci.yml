@@ -61,7 +61,7 @@ jobs:
         run: ./gradlew --version
 
       - name: Run Order Test
-        run: ./gradlew clean test --info
+        run: ./gradlew clean test --no-configuration-cache
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
