@@ -13,6 +13,7 @@ jobs:
   order-test:
 
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     services:
       postgres:
@@ -45,31 +46,48 @@ jobs:
           distribution: temurin
           java-version: 22
 
+      - name: Verify Java Version
+        run: java -version
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Verify Gradle Version
+        run: ./gradlew --version
 
       - name: Make Gradle Wrapper Executable
         run: chmod +x gradlew
 
       - name: Run Order Test
-        run: ./gradlew test
+        run: ./gradlew clean test --info
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
             -Ddb.user=postgres
             -Ddb.password=postgres
 
-      # Keep this only while debugging. You can remove it later.
+      # Debug step (safe to keep while developing)
       - name: Debug Allure Results
         if: always()
         run: |
-          echo "=== Allure files ==="
+          echo "=== Allure Results ==="
           ls -la build/allure-results || true
+
+          echo "=== Test Reports ==="
+          ls -R build/reports || true
 
           echo "=== Result JSON ==="
           cat build/allure-results/*-result.json || true
 
-      # Checkout existing gh-pages history (won't fail on first run)
+      # Upload JUnit reports
+      - name: Upload JUnit Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-test-results
+          path: build/test-results/
+
+      # Checkout gh-pages history
       - name: Checkout gh-pages branch
         if: always()
         continue-on-error: true
@@ -78,6 +96,7 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      # Generate Allure Report
       - name: Generate Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master
@@ -87,6 +106,18 @@ jobs:
           gh_pages: gh-pages
           allure_history: allure-history
 
+      # Upload Allure files as workflow artifacts
+      - name: Upload Allure Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: |
+            build/allure-results
+            allure-report
+            allure-history
+
+      # Publish report to GitHub Pages
       - name: Deploy report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
