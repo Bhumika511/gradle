@@ -15,7 +15,6 @@ val extentVersion = "5.1.2"
 val extentCucumberAdapterVersion = "1.14.0"
 val flywayVersion = "10.22.0"
 val postgresqlVersion = "42.7.4"
-val testcontainersVersion = "2.0.5"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_22
@@ -24,11 +23,14 @@ java {
 
 dependencies {
 
-    // BOMs
+    // JUnit BOM
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+
+    // Cucumber BOM
     testImplementation(platform("io.cucumber:cucumber-bom:$cucumberVersion"))
+
+    // Allure BOM
     testImplementation(platform("io.qameta.allure:allure-bom:$allureVersion"))
-    testImplementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
 
     // Selenium
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
@@ -39,13 +41,13 @@ dependencies {
     // JUnit
     testImplementation("org.junit.jupiter:junit-jupiter")
 
+    // JUnit Suite
+    testImplementation("org.junit.platform:junit-platform-suite")
+
     // Cucumber
     testImplementation("io.cucumber:cucumber-java")
     testImplementation("io.cucumber:cucumber-junit-platform-engine")
     testImplementation("io.cucumber:cucumber-picocontainer")
-
-    // JUnit Platform Suite
-    testImplementation("org.junit.platform:junit-platform-suite")
 
     // Allure
     testImplementation("io.qameta.allure:allure-junit5")
@@ -65,10 +67,6 @@ dependencies {
 
     // PostgreSQL Driver
     testImplementation("org.postgresql:postgresql:$postgresqlVersion")
-
-    // Testcontainers (version comes from BOM)
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:postgresql")
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -112,8 +110,9 @@ tasks.withType<Test>().configureEach {
 
     testLogging {
         events("passed", "failed", "skipped")
+        showStandardStreams = true
         exceptionFormat =
-            org.gradle.api.tasks.testing.logging.TestExceptionFormat.SHORT
+            org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }
 
@@ -124,21 +123,21 @@ fun Test.useProjectTestClasses() {
 
 tasks.test {
 
-    description =
-        "Runs the default classroom-safe Gradle checks."
+    description = "Runs Order tests."
 
     include("**/OrderTest.class")
-    include("**/AllureReportingTest.class")
+
+    // Change this if your actual class name differs.
+    include("**/allureReporting.class")
 
     maxParallelForks = 1
 }
 
 val orderTest by tasks.registering(Test::class) {
 
-    description =
-        "Runs Order repository tests."
-
     group = "verification"
+
+    description = "Runs Order repository tests."
 
     useProjectTestClasses()
 
@@ -151,9 +150,6 @@ val orderTest by tasks.registering(Test::class) {
 
 tasks.register("w6d2BuildSummary") {
 
-    description =
-        "Prints Week 6 Day 2 Gradle summary."
-
     group = "help"
 
     doLast {
@@ -162,23 +158,18 @@ tasks.register("w6d2BuildSummary") {
             """
             W6D2 Build Tooling Summary
 
-            Maven compile:
-            mvn clean test-compile
+            Maven:
+            mvn clean test
 
-            Gradle compile:
-            ./gradlew clean testClasses
+            Gradle:
+            ./gradlew clean test
 
-            Maven structure:
-            mvn clean -Dtest=W6D1RefactoringStructureTest test
+            Report:
+            build/reports/tests/test/index.html
 
-            Gradle structure:
-            ./gradlew clean w6d1StructureTest
+            Allure Results:
+            build/allure-results
 
-            Gradle smoke:
-            ./gradlew cucumberSmoke -Pheadless=true
-
-            Gradle scan:
-            ./gradlew w6d1StructureTest --scan
             """.trimIndent()
         )
     }
