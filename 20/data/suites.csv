@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Verify that a new order is created successfully.","171","createsOrder()","","2026-07-11","passed","2026-07-11","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","createsOrder"
+"Verify total number of orders.","56","countsOrders()","","2026-07-11","passed","2026-07-11","","com.sdet.builder.test.OrderTest","com.sdet.builder.test.OrderTest","countsOrders"
